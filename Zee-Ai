@@ -8,8 +8,8 @@
     body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 50px; }
     #chat { width: 400px; border: 1px solid #ccc; padding: 10px; }
     #messages { height: 300px; overflow-y: scroll; border: 1px solid #eee; padding: 5px; margin-bottom: 10px; }
-    .user { color: blue; }
-    .bot { color: green; }
+    .user { color: blue; margin-bottom: 5px; }
+    .bot { color: green; margin-bottom: 5px; }
     input { width: 80%; padding: 5px; }
     button { width: 18%; padding: 5px; }
   </style>
@@ -24,27 +24,28 @@
 
 <script>
   const botData = {
-    // Example: question : answer
+    // Demo pre-inserted Q&A
     "hello": "Hi there! How can I help you today?",
     "how are you": "I'm just a bot, but I'm doing great!",
     "what is your name": "I'm Zee AI!",
+    "what can you do": "I can answer common questions you ask!",
+    "who created you": "I was created by Ice738!",
     "default": "Sorry, I don't understand that. Can you ask something else?"
   };
 
-  // Add 1000 Q&A pairs (replace the example above with your full dataset)
-  // For demonstration, I'm using 4; you can expand by copying the format
-
   function sendMessage() {
     const input = document.getElementById('userInput').value.toLowerCase().trim();
+    if (!input) return;
+    
     const messages = document.getElementById('messages');
 
-    // Display user message
+    // User message
     const userMsg = document.createElement('div');
     userMsg.classList.add('user');
     userMsg.textContent = "You: " + input;
     messages.appendChild(userMsg);
 
-    // Find bot response
+    // Bot response
     const botReply = botData[input] || botData["default"];
     const botMsg = document.createElement('div');
     botMsg.classList.add('bot');
