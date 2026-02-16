@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zee AI Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 50px; }
+    #chat { width: 400px; border: 1px solid #ccc; padding: 10px; }
+    #messages { height: 300px; overflow-y: scroll; border: 1px solid #eee; padding: 5px; margin-bottom: 10px; }
+    .user { color: blue; }
+    .bot { color: green; }
+    input { width: 80%; padding: 5px; }
+    button { width: 18%; padding: 5px; }
+  </style>
+</head>
+<body>
+
+<div id="chat">
+  <div id="messages"></div>
+  <input type="text" id="userInput" placeholder="Type your question...">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+  const botData = {
+    // Example: question : answer
+    "hello": "Hi there! How can I help you today?",
+    "how are you": "I'm just a bot, but I'm doing great!",
+    "what is your name": "I'm Zee AI!",
+    "default": "Sorry, I don't understand that. Can you ask something else?"
+  };
+
+  // Add 1000 Q&A pairs (replace the example above with your full dataset)
+  // For demonstration, I'm using 4; you can expand by copying the format
+
+  function sendMessage() {
+    const input = document.getElementById('userInput').value.toLowerCase().trim();
+    const messages = document.getElementById('messages');
+
+    // Display user message
+    const userMsg = document.createElement('div');
+    userMsg.classList.add('user');
+    userMsg.textContent = "You: " + input;
+    messages.appendChild(userMsg);
+
+    // Find bot response
+    const botReply = botData[input] || botData["default"];
+    const botMsg = document.createElement('div');
+    botMsg.classList.add('bot');
+    botMsg.textContent = "Zee AI: " + botReply;
+    messages.appendChild(botMsg);
+
+    // Scroll to bottom
+    messages.scrollTop = messages.scrollHeight;
+    document.getElementById('userInput').value = '';
+  }
+</script>
+
+</body>
+</html>
