@@ -7,72 +7,93 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
       display: flex;
       justify-content: center;
-      margin-top: 50px;
-      background: #f0f0f0;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    #chat {
+    #chatContainer {
       width: 400px;
+      height: 600px;
       border: 2px solid #333;
-      border-radius: 8px;
-      background: #fff;
-      padding: 10px;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
+      background-color: #1e1e1e;
+    }
+    #chatHeader {
+      padding: 15px;
+      background-color: #000;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
     #messages {
-      height: 350px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
+      flex: 1;
       padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      background: #fafafa;
+      overflow-y: auto;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      background-color: #1e1e1e;
     }
     .user {
-      color: blue;
+      color: #00bfff;
       margin-bottom: 5px;
     }
     .bot {
-      color: green;
+      color: #7fff00;
       margin-bottom: 5px;
     }
-    #input-area {
+    #inputArea {
       display: flex;
+      padding: 10px;
+      background-color: #1e1e1e;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
     #userInput {
       flex: 1;
-      padding: 8px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
       font-size: 14px;
+      outline: none;
+      background-color: #333;
+      color: #fff;
     }
     #sendBtn {
-      padding: 8px 12px;
-      font-size: 14px;
       margin-left: 5px;
-      cursor: pointer;
-      background: #333;
-      color: #fff;
+      padding: 10px 15px;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
     }
     #sendBtn:hover {
-      background: #555;
+      background-color: #444;
     }
   </style>
 </head>
 <body>
 
-<div id="chat">
+<div id="chatContainer">
+  <div id="chatHeader">Zee AI</div>
   <div id="messages"></div>
-  <div id="input-area">
-    <input type="text" id="userInput" placeholder="Type your question...">
+  <div id="inputArea">
+    <input type="text" id="userInput" placeholder="Type your message...">
     <button id="sendBtn">Send</button>
   </div>
 </div>
 
 <script>
-  // Predefined questions and answers
+  // Pre-inserted questions & answers
   const botData = {
     "hi": "Hello! How can I help you today?",
     "hello": "Hi there! How’s it going?",
@@ -88,10 +109,9 @@
   const sendBtn = document.getElementById('sendBtn');
   const messagesDiv = document.getElementById('messages');
 
-  // Function to send message
   function sendMessage() {
     const userText = inputField.value.trim();
-    if (!userText) return; // ignore empty messages
+    if (!userText) return;
 
     // Display user message
     const userMsg = document.createElement('div');
@@ -99,7 +119,7 @@
     userMsg.textContent = "You: " + userText;
     messagesDiv.appendChild(userMsg);
 
-    // Determine bot response
+    // Get bot response
     const key = userText.toLowerCase();
     const botReply = botData[key] || botData["default"];
 
@@ -108,18 +128,18 @@
     botMsg.textContent = "Zee AI: " + botReply;
     messagesDiv.appendChild(botMsg);
 
-    // Scroll chat to bottom
+    // Scroll to bottom
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-    // Clear input field
+    // Clear input
     inputField.value = '';
     inputField.focus();
   }
 
   // Event listeners
   sendBtn.addEventListener('click', sendMessage);
-  inputField.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') sendMessage();
+  inputField.addEventListener('keypress', function(e){
+    if(e.key === 'Enter') sendMessage();
   });
 </script>
 
